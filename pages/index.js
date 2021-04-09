@@ -8,7 +8,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="p-4 bg-blue-500 text-3xl">
+      <header className="p-4 bg-green-500 text-3xl">
         <h1 className="border-gray 50">Cookie Stand Admin</h1>
       </header>
 
@@ -29,7 +29,7 @@ export default function Home() {
 </div>
       </main>
 
-      <footer className="mb-30">
+      <footer className="mb-30 p-4 bg-green-500 ">
       &copy; 2021</footer>
     </div>
   )
