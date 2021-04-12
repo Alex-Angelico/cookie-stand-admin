@@ -25,6 +25,16 @@ export default function Home() {
 
   function getCustomersHourly(min, max) { return Math.random() * (max - min + 1) + min }
 
+  function getHourlySubtotals(hours, sales) {
+    var hourly_subtotals = []
+    for (var i = 0; i < hours.length; i++) {
+      var hour_subtotal = 0
+      for (var j = 0; j < sales.length; j++) { hour_subtotal += sales[j].sales_data[i] }
+      hourly_subtotals.push(hour_subtotal)
+    }
+    return hourly_subtotals
+  }
+
   function getTotalCookies(hourly_data) {
     var total = 0
     for (var i = 0; i < hourly_data.length; i++) { total += hourly_data[i] }
@@ -42,27 +52,29 @@ export default function Home() {
     )
   }
 
-  function CreateForm(props) {
+  function CreateForm() {
     return (
-      <div className="p-1 mt-8 mb-8 ml-auto mr-auto w-5/6 h-auto rounded-md bg-green-300 text-center block self-center">
+      <div className="p-1 mt-8 mb-8 ml-auto mr-auto w-5/6 h-auto rounded-md bg-green-300 text-center self-center">
         <h2 className="text-xl m-4">Create Cookie Stand</h2>
         <form onSubmit={storeCreate} className="">
-          <label className="mr-2.5">Location</label>
-          <input name="location" className="w-11/12"></input>
-          <div className="grid grid-cols-4 place-items-center mt-4 mb-4">
-            <section className="rounded-md bg-green-100 p-2">
+          <section className="">
+            <label className="mr-2.5">Location</label>
+            <input name="location" className="md:w-9/12 lg:w-10/12"></input>
+          </section>
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 place-items-center mt-4 mb-4">
+            <section className="rounded-md bg-green-100 m-1 p-2">
               <label className="block">Minimum Customers per Hour</label>
               <input name="minimum" className="block w-56"></input>
             </section>
-            <section className="rounded-md bg-green-100 p-2">
+            <section className="rounded-md bg-green-100 m-1 p-2">
               <label className="block">Maximum Customers per Hour</label>
               <input name="maximum" className="block w-56"></input>
             </section>
-            <section className="rounded-md bg-green-100 p-2">
+            <section className="rounded-md bg-green-100 m-1 p-2">
               <label className="block">Average Cookies per Sale</label>
               <input name="average" className="block w-56"></input>
             </section>
-            <button className="rounded-md bg-green-500 w-56 h-16">Create</button>
+            <button className="rounded-md bg-green-500 m-1 w-60 h-16">Create</button>
           </div>
         </form>
       </div>
@@ -71,15 +83,10 @@ export default function Home() {
 
   function ReportTable(props) {
     if (props.sales_hourly.length === 0) { return (<h2 className="mt-8 mb-8 ml-auto mr-auto text-center w-5/6">No Cookie Stands Available</h2>) }
-    var hourly_subtotals = []
-    for (var i = 0; i < props.store_hours.length; i++) {
-      var hour_subtotal = 0
-      for (var j = 0; j < props.sales_hourly.length; j++) { hour_subtotal += props.sales_hourly[j].sales_data[i] }
-      hourly_subtotals.push(hour_subtotal)
-    }
+    var hourly_subtotals = getHourlySubtotals(props.store_hours, props.sales_hourly)
     return (
-      <table className="p-1 mt-8 mb-8 ml-auto mr-auto w-5/6 h-auto bg-green-500 text-center self-center">
-        <thead>
+      <table className="p-1 mt-8 mb-8 ml-auto mr-auto w-5/6 h-auto text-center self-center">
+        <thead className="bg-green-500">
           <tr>
             <th className="border border-gray-700">Location</th>
             {props.store_hours.map(hour => (<th className="border border-gray-700">{hour}</th>))}
@@ -95,7 +102,7 @@ export default function Home() {
             </tr>
           ))}
         </tbody>
-        <tfoot>
+        <tfoot className="bg-green-500">
           <th className="border border-gray-700">Totals</th>
           {hourly_subtotals.map(subtotal => (<th className="border border-gray-700">{subtotal}</th>))}
           <th className="border border-gray-700">{getTotalCookies(hourly_subtotals)}</th>
