@@ -5,38 +5,29 @@ import { hours } from '../assets/data'
 
 export default function Home() {
 
-  // const [storeData, setStoreData] = useState('No Cookie Stands Available')
   const [allStoresSales, setAllStoresSales] = useState([]);
 
   function storeCreate(event) {
-    event.preventDefault();
-    const data = getCookieSalesHourly(event.target.minimum.value, event.target.maximum.value, event.target.average.value, hours.length)
+    event.preventDefault()
 
     const newStoreRecord = {
       location: event.target.location.value,
-      sales_data: data
+      sales_data: getCookieSalesHourly(event.target.minimum.value, event.target.maximum.value, event.target.average.value, hours.length)
     }
     setAllStoresSales([...allStoresSales, newStoreRecord])
   }
 
   function getCookieSalesHourly(min, max, avg, count) {
     var store_sales = []
-    for (var i = 0; i < count; i++) {
-      var hour_sales = Math.round(getCustomersHourly(min, max) * avg);
-      store_sales.push(hour_sales);
-    }
+    for (var i = 0; i < count; i++) { store_sales.push(Math.round(getCustomersHourly(min, max) * avg)) }
     return store_sales
   }
 
-  function getCustomersHourly(min, max) {
-    return Math.random() * (max - min + 1) + min;
-  }
+  function getCustomersHourly(min, max) { return Math.random() * (max - min + 1) + min }
 
   function getTotalCookies(hourly_data) {
     var total = 0
-    for (var i = 0; i < hourly_data.length; i++) {
-      total += hourly_data[i]
-    }
+    for (var i = 0; i < hourly_data.length; i++) { total += hourly_data[i] }
     return total
   }
 
@@ -83,9 +74,7 @@ export default function Home() {
     var hourly_subtotals = []
     for (var i = 0; i < props.store_hours.length; i++) {
       var hour_subtotal = 0
-      for (var j = 0; j < props.sales_hourly.length; j++) {
-        hour_subtotal += props.sales_hourly[j].sales_data[i]
-      }
+      for (var j = 0; j < props.sales_hourly.length; j++) { hour_subtotal += props.sales_hourly[j].sales_data[i] }
       hourly_subtotals.push(hour_subtotal)
     }
     return (
@@ -116,12 +105,7 @@ export default function Home() {
     )
   }
 
-  function Footer(props) {
-    return (
-      <footer className="mb-30 p-4 bg-green-500 ">
-        {props.location_count} Locations Worldwide</footer>
-    )
-  }
+  function Footer(props) { return (<footer className="mb-30 p-4 bg-green-500 ">{props.location_count} Locations Worldwide</footer>) }
 
   return (
     <div className="">
