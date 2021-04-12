@@ -9,6 +9,22 @@ export default function Home() {
     event.preventDefault();
     setStoreData(`{"location":"${event.target.location.value}","minCustomers":${event.target.minimum.value},"maxCustomers":${event.target.maximum.value},"avgCookies":${event.target.average.value}}`)
   }
+
+  function Header(props) {
+    return (
+      <header className="p-4 bg-green-500 text-3xl">
+        <h1 className="border-gray 50">{props.title}</h1>
+      </header>
+    )
+  }
+
+  function Footer(props) {
+    return (
+      <footer className="mb-30 p-4 bg-green-500 ">
+        {props.location_count} Locations World Wide</footer>
+    )
+  }
+
   return (
     <div className="">
       <Head>
@@ -16,9 +32,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="p-4 bg-green-500 text-3xl">
-        <h1 className="border-gray 50">Cookie Stand Admin</h1>
-      </header>
+      <Header title="Cookie Stand Admin" />
 
       <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
         <div className="m-8 w-5/6 h-auto rounded-md bg-green-300">
@@ -27,19 +41,19 @@ export default function Home() {
             <label className="mr-2.5">Location</label>
             <input name="location" className="w-11/12"></input>
             <div className="grid grid-cols-4 place-items-center mt-4 mb-4">
-              <section>
+              <section className="rounded-md bg-green-100 p-2">
                 <label className="block">Minimum Customers per Hour</label>
                 <input name="minimum" className="block w-56"></input>
               </section>
-              <section>
+              <section className="rounded-md bg-green-100 p-2">
                 <label className="block">Maximum Customers per Hour</label>
                 <input name="maximum" className="block w-56"></input>
               </section>
-              <section>
+              <section className="rounded-md bg-green-100 p-2">
                 <label className="block">Average Cookies per Sale</label>
                 <input name="average" className="block w-56"></input>
               </section>
-              <button className="bg-green-500 w-56 h-14">Create</button>
+              <button className="rounded-md bg-green-500 w-56 h-14">Create</button>
             </div>
           </form>
         </div>
@@ -47,10 +61,7 @@ export default function Home() {
         <p className="m-8">{storeData}</p>
       </main>
 
-      <footer className="mb-30 p-4 bg-green-500 ">
-        &copy; 2021</footer>
+      <Footer location_count="0" />
     </div>
   )
 }
-
-// text-center
