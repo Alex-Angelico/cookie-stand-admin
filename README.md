@@ -40,4 +40,5 @@ Within `cookie-stand-admin`, use `dnpm start dev` and navigate to `localhost:300
 
 ## Change Log
 
+1.0: *Store creation form complete to spec* - 11 Apr 2021
 0.2: *Basic setup complete, laying out page elements* - 08 Apr 2021
