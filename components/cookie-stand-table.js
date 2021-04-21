@@ -4,51 +4,53 @@ export default function CookieStandTable({ stands, onDelete }) {
 
   return (
     <Table>
-      <thead className="bg-green-500">
-        <tr>
+      <table className="">
+        <thead className="bg-green-500">
+          <tr className="text-left">
 
-          <TH>Location</TH>
-          {hours.map(slot => (
-            <TH key={slot}>{slot}</TH>
-          ))}
-          <TH>Totals</TH>
-        </tr>
-      </thead>
-      <tbody>
-        {stands.map((stand, i) => {
+            <TH>Location</TH>
+            {hours.map(slot => (
+              <TH key={slot}>{slot}</TH>
+            ))}
+            <TH>Totals</TH>
+          </tr>
+        </thead>
+        <tbody>
+          {stands.map((stand, i) => {
 
-          return (
-            <tr key={stand.id} className="text-left odd:bg-green-400 even:bg-green-200">
+            return (
+              <tr key={stand.id} className="odd:bg-green-400 even:bg-green-200">
 
-              <TH>
-                <div className="w-48 text-justify">
+                <TH>
+                  <div className="flex item-center justify-between gap-2 px-4">
 
-                  <p className="inline">{stand.location}</p>
+                    <p className="inline">{stand.location}</p>
 
-                  <span onClick={() => onDelete(stand)} className="">X</span>
-                </div>
-              </TH>
+                    <span onClick={() => onDelete(stand)} className="pl-4">X</span>
+                  </div>
+                </TH>
 
-              {stand.cookiesEachHour.map((amt, i) => (
-                <TD key={i}>
-                  {amt}
-                </TD>
-              ))}
-              <TD>{stand.totalDailyCookies}</TD>
-            </tr>
-          )
-        })}
-      </tbody>
-      <tfoot className="bg-green-500">
-        <tr>
-          <TH>Totals</TH>
-          {hours.map((_, i) => {
-            const amt = stands.reduce((acc, cur) => acc + cur.cookiesEachHour[i], 0);
-            return <TD key={'amt' + i}>{amt}</TD>
+                {stand.cookiesEachHour.map((amt, i) => (
+                  <TD key={i}>
+                    {amt}
+                  </TD>
+                ))}
+                <TD>{stand.totalDailyCookies}</TD>
+              </tr>
+            )
           })}
-          <TD>{stands.reduce((acc, cur) => acc + cur.totalDailyCookies, 0)}</TD>
-        </tr>
-      </tfoot>
+        </tbody>
+        <tfoot className="bg-green-500">
+          <tr>
+            <TH>Totals</TH>
+            {hours.map((_, i) => {
+              const amt = stands.reduce((acc, cur) => acc + cur.cookiesEachHour[i], 0);
+              return <TD key={'amt' + i}>{amt}</TD>
+            })}
+            <TD>{stands.reduce((acc, cur) => acc + cur.totalDailyCookies, 0)}</TD>
+          </tr>
+        </tfoot>
+      </table>
     </Table>
 
   );

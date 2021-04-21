@@ -52,6 +52,7 @@ Within `cookie-stand-admin`, use `npm start dev` and navigate to `localhost:3000
 
 ## Change Log
 
+1.2.5: *Hosted project on Vercel* - 20 Apr 2021  
 1.2: *Refactored for login-gated API access* - 15 Apr 2021  
 1.1: *Reporting table functionality complete* - 12 Apr 2021  
 1.0.2: *New header and footer functions complete* - 11 Apr 2021  
